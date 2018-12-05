@@ -21,7 +21,7 @@ try {
     // make sure you change logic for setting the password
     $user_body["password"] = "top_secret"; 
     
-    $user_body["roles"] = array("user");
+    $user_body["role"] = "user";
 
     $user = CryptlexApi::CreateUser($user_body);
 
