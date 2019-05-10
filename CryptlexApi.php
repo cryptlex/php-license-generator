@@ -15,15 +15,23 @@ class CryptlexApi
 	{
 		$api_url = self::$base_path . "/users";
 
+        // creating new user...
+        $user = self::PostRequest($api_url, $body);
+        return $user;
+	}
+
+	public static function GetUser($email)
+	{
+		$api_url = self::$base_path . "/users";
+		$query['email'] = $email;
         // check whether user exists
-        $users = self::GetRequest($api_url."?email=".$body["email"]);
+        $users = self::GetRequest($api_url."?".http_build_query($query));
         if (count($users)) {
             // user already exists!
             return $users[0];
-        }
-		// user not found, creating new user...
-        $user = self::PostRequest($api_url, $body);
-        return $user;
+		} 
+		// user not found
+		return NULL;
 	}
 
 	public static function CreateLicense($body)
